@@ -2,14 +2,14 @@
     <div class="player-page h-100 d-flex flex-column">
         <div :style="{ background: config.bgColor, color: config.textColor, fontFamily: config.fontFamily }"
             class="player-stage">
-            <div class="player-content overflow-auto" ref="textContainer">
-                <div class="player-text" :style="{ lineHeight: config.lineHeight, fontSize: config.fontSize + 'px' }">
+            <div class="player-content overflow-auto" :class="{'d-flex flex-column justify-content-center': config.highlightOnly}" ref="textContainer">
+                <div class="player-text" :class="{'text-center': config.highlightOnly}" :style="{ lineHeight: config.lineHeight, fontSize: config.fontSize + 'px' }">
                     <div v-if="words.length === 0" class="text-muted">No file loaded. Add a file and click Load to
                         begin.</div>
                     <template v-else>
-                        <span class="text-muted d-none">{{ playedcontentRef }}</span>
-                        <span id="highlight" class="fw-bold text-black">{{ highlightRef }}</span>
-                        <span class="text-muted d-none">{{ remainingContentRef }}</span>
+                        <span v-if="!config.highlightOnly" class="text-muted">{{ playedcontentRef }}</span>
+                        <span id="highlight" class="fw-bold text-black" >{{ highlightRef }}</span>
+                        <span v-if="!config.highlightOnly" class="text-muted">{{ remainingContentRef }}</span>
                     </template>
                 </div>
             </div>
@@ -107,6 +107,18 @@ function advanceHighlight() {
   nextTick(scrollHighlightIntoView)
 }
 
+function getInterval() {
+  return Math.max(20, Math.round((60000 * Math.max(1, props.config.highlightCount)) / Math.max(1, props.config.wpm)))
+}
+
+function restartTimer() {
+  if (!isPlaying.value) return
+  if (timer.value) {
+    clearInterval(timer.value)
+  }
+  timer.value = setInterval(advanceHighlight, getInterval())
+}
+
 function play() {
   if (isPlaying.value || (!highlightRef.value && !remainingContentRef.value)) return
 
@@ -115,8 +127,7 @@ function play() {
   }
 
   isPlaying.value = true
-  const interval = Math.max(20, Math.round((60000 * Math.max(1, props.config.highlightCount)) / Math.max(1, props.config.wpm)))
-  timer.value = setInterval(advanceHighlight, interval)
+  timer.value = setInterval(advanceHighlight, getInterval())
 }
 
 function pause() {
@@ -143,6 +154,13 @@ watch(
     pause()
   },
   { immediate: true },
+)
+
+watch(
+  () => [props.config.wpm, props.config.highlightCount],
+  () => {
+    restartTimer()
+  },
 )
 
 onUnmounted(() => {

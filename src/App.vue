@@ -75,6 +75,12 @@
                 <label class="form-label">Highlight words</label>
                 <input type="number" min="1" max="10" v-model.number="config.highlightCount" class="form-control" />
               </div>
+              <div class="col d-flex align-items-center">
+                <div class="form-check mt-3">
+                  <input class="form-check-input" type="checkbox" id="highlightOnly" v-model="config.highlightOnly" />
+                  <label class="form-check-label" for="highlightOnly">Highlight only</label>
+                </div>
+              </div>
             </div>
             <div class="mt-2">
               <label class="form-label">Play speed (words per minute)</label>
@@ -107,6 +113,7 @@ const defaultConfig = {
   lineHeight: 1.6,
   highlightCount: 3,
   wpm: 300,
+  highlightOnly: false,
 }
 
 const currentPage = ref('library')
