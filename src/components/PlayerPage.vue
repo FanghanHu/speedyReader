@@ -7,9 +7,9 @@
                     <div v-if="words.length === 0" class="text-muted">No file loaded. Add a file and click Load to
                         begin.</div>
                     <template v-else>
-                        <span class="text-muted">{{ playedcontentRef }}</span>
+                        <span class="text-muted d-none">{{ playedcontentRef }}</span>
                         <span id="highlight" class="fw-bold text-black">{{ highlightRef }}</span>
-                        <span class="text-muted">{{ remainingContentRef }}</span>
+                        <span class="text-muted d-none">{{ remainingContentRef }}</span>
                     </template>
                 </div>
             </div>
