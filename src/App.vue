@@ -4,7 +4,7 @@
       <div class="col-12 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
         <div>
           <h3 class="m-0">SpeedyReader</h3>
-          <p class="small text-muted mb-0">Manage your library and speed-read loaded text.</p>
+          <p class="small text-muted mb-0">Manage your library and speed-read loaded text. </p>
         </div>
         <div class="btn-group" role="group" aria-label="Page navigation">
           <button type="button" class="btn btn-outline-primary" :class="{ active: currentPage === 'library' }" @click="currentPage = 'library'">Library</button>
