@@ -7,9 +7,11 @@ Simple in-browser speed-reading web app.
 - Configurable font, colors, line height, highlight words, and words-per-minute.
 
 Usage:
-- Open index.html in a static file server or the browser.
+- Run `npm install`.
+- Use `npm run dev` to start the local Vite development server.
+- Open the app at the URL shown by Vite.
 - Add files, load them, and use Settings to configure playback.
 
 Notes:
 - PDFs are parsed using pdf.js in the browser.
-- No build step required. Uses Vue 3 via CDN.
+- Uses Vue 3 single-file component architecture with Vite.
