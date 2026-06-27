@@ -1,0 +1,15 @@
+/* styles for SpeedyReader */
+:root{
+  --app-bg: #f8f9fa;
+}
+html,body,#app{height:100%;}
+body{background:var(--app-bg);font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;}
+.container-app{padding:24px}
+.drop-area{border:2px dashed #ccc;border-radius:8px;padding:24px;text-align:center;color:#666;background:#fff}
+.library-list{max-height:240px;overflow:auto}
+.player-row{font-size:28px;padding:28px;border-radius:6px;text-align:center;min-height:100px;display:flex;align-items:center;justify-content:center}
+.player-row .word{color:#777}
+.player-row .highlight{color:#000;font-weight:700}
+.controls .btn{margin-right:8px}
+.small-muted{color:#6c757d}
+.settings-panel label{font-size:0.9rem}
